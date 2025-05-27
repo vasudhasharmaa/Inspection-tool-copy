@@ -1,0 +1,119 @@
+body {
+  background: #f5f6fa;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.App-container {
+  max-width: 600px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  padding: 32px 28px 28px 28px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2.1rem;
+  margin-bottom: 1.5em;
+  color: #22223b;
+  font-weight: 700;
+}
+
+form > div {
+  margin-bottom: 1.2em;
+}
+
+label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.3em;
+  color: #4a4e69;
+}
+
+input[type="number"], input[type="text"] {
+  width: 100%;
+  padding: 0.55em;
+  border: 1px solid #bfc0c0;
+  border-radius: 6px;
+  font-size: 1em;
+  margin-bottom: 0.5em;
+  box-sizing: border-box;
+  background: #f7f9fa;
+  transition: border 0.2s;
+}
+input[type="number"]:focus, input[type="text"]:focus {
+  border: 1.5px solid #1976d2;
+  outline: none;
+}
+
+button[type="submit"], .reset-btn {
+  width: 100%;
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.7em;
+  font-size: 1.1em;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 1em;
+  transition: background 0.2s;
+}
+
+button[type="submit"]:hover {
+  background: #1565c0;
+}
+
+.reset-btn {
+  background: #bdbdbd;
+  color: #22223b;
+  margin-top: 0.5em;
+}
+.reset-btn:hover {
+  background: #757575;
+  color: #fff;
+}
+
+ul {
+  padding-left: 1.2em;
+}
+
+li {
+  margin-bottom: 0.3em;
+  font-size: 1em;
+}
+
+div[style*="color: red"] {
+  background: #ffe5e5;
+  border: 1px solid #ffb3b3;
+  padding: 0.7em;
+  border-radius: 6px;
+  margin-bottom: 1em;
+}
+
+div[style*="color: orange"] {
+  background: #fff4e5;
+  border: 1px solid #ffd59e;
+  padding: 0.7em;
+  border-radius: 6px;
+  margin-bottom: 1em;
+}
+
+.App-container form > div > div {
+  margin-bottom: 0.5em;
+}
+
+.SampleSizes-section {
+  background: #f7f9fa;
+  border-radius: 8px;
+  padding: 1em;
+  margin-top: 1.5em;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.App-container > div:not(:first-child):not(.SampleSizes-section) {
+  margin-bottom: 0.7em;
+}
