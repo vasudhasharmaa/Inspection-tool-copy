@@ -59,7 +59,13 @@ const SampleSizeCalculator: React.FC<SampleSizeCalculatorProps> = ({
   };
 
   return (
-    <div className="App-container">
+    <div 
+      className="App-container"
+      data-testid="sample-size-calculator"
+      data-lot-size={lotSize}
+      data-inspection-level={inspectionLevel}
+      data-sample-size={sampleSize}
+    >
       <h1>Garment Inspection Sample Calculator</h1>
       <div>Lot Size: {lotSize}</div>
       <div>Inspection Level: {inspectionLevel}</div>
