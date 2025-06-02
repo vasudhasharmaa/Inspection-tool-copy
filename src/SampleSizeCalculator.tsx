@@ -1,4 +1,13 @@
 import React, { useState } from 'react';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
 
 type SampleSizeCalculatorProps = {
   sizes: string[];
@@ -59,47 +68,92 @@ const SampleSizeCalculator: React.FC<SampleSizeCalculatorProps> = ({
   };
 
   return (
-    <div className="App-container">
-      <h1>Garment Inspection Sample Calculator</h1>
-      <div>Lot Size: {lotSize}</div>
-      <div>Inspection Level: {inspectionLevel}</div>
-      <div>Sample Size: {sampleSize}</div>
+    <div 
+      className="App-container"
+      data-testid="sample-size-calculator"
+      data-lot-size={lotSize}
+      data-inspection-level={inspectionLevel}
+      data-sample-size={sampleSize}
+    >
+      <Paper elevation={3} sx={{ p: 2, mb: 2, background: '#e3f2fd' }}>
+        <Typography variant="h4" component="h1" gutterBottom sx={{ fontWeight: 'bold' }}>
+          Garment Inspection Sample Quantity Calculator
+        </Typography>
+        <Box sx={{ display: 'flex', gap: 4, alignItems: 'center', background: '#ede7f6', p: 2, borderRadius: 2, mb: 2 }}>
+          <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
+            Lot Size: {lotSize}
+          </Typography>
+          <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
+            Inspection Level: {inspectionLevel}
+          </Typography>
+          <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
+            Sample Size: {sampleSize}
+          </Typography>
+        </Box>
+      </Paper>
       {error && (
         <div style={{ color: "red", marginBottom: "1em" }}>
           {error}
         </div>
       )}
       <form onSubmit={handleCalculate}>
-        <div>
-          <label>Quantities by Size:</label>
-          {sizes.map((label, idx) => (
-            <div key={idx}>
-              <label>{label}:</label>
-              <input
-                type="number"
-                value={quantities[idx]}
-                onChange={e => handleQuantityChange(idx, Number(e.target.value))}
-              />
-            </div>
-          ))}
-        </div>
+        <TableContainer component={Paper} sx={{ marginTop: 2, marginBottom: 2 }}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell align="center"><strong>Size</strong></TableCell>
+                <TableCell align="center"><strong>Quantity</strong></TableCell>
+                <TableCell align="center"><strong>Sample Size</strong></TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {sizes.map((label, idx) => (
+                <TableRow key={idx}>
+                  <TableCell align="center">{label}</TableCell>
+                  <TableCell align="center">
+                    <input
+                      type="number"
+                      value={quantities[idx]}
+                      onChange={e => handleQuantityChange(idx, Number(e.target.value))}
+                      style={{ width: 80 }}
+                    />
+                  </TableCell>
+                  <TableCell align="center">
+                    {sampleSizes.length > 0 ? sampleSizes[idx] : ''}
+                  </TableCell>
+                </TableRow>
+              ))}
+              <TableRow>
+                <TableCell align="center"><strong>Total</strong></TableCell>
+                <TableCell align="center">
+                  <strong>{quantities.reduce((sum, qty) => sum + qty, 0)}</strong>
+                </TableCell>
+                <TableCell align="center">
+                  <strong>{sampleSizes.length > 0 ? sampleSizes.reduce((sum, s) => sum + s, 0) : ''}</strong>
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
         <button type="submit">Calculate</button>
         <button type="button" className="reset-btn" onClick={handleReset}>Reset</button>
       </form>
       {sampleSizes.length > 0 && (
-        <div className="SampleSizes-section">
-          <h2>Sample Sizes:</h2>
-          <ul>
+        <Paper elevation={2} sx={{ p: 2, mt: 2, background: '#f3e5f5' }}>
+          <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 1 }}>
+            Sample Sizes:
+          </Typography>
+          <ul style={{ margin: 0, paddingLeft: 20 }}>
             {sampleSizes.map((sample, idx) => (
               <li key={idx}>
                 {sizes[idx]}: {sample} pcs
               </li>
             ))}
           </ul>
-          <p>
+          <Typography sx={{ mt: 1 }}>
             <strong>Total Sample Size:</strong> {sampleSizes.reduce((sum, s) => sum + s, 0)} pcs
-          </p>
-        </div>
+          </Typography>
+        </Paper>
       )}
       {warning && (
         <div style={{ color: "orange", marginBottom: "1em" }}>
